@@ -81,7 +81,7 @@ show_status() {
     fi
     
     # Verificar mapeo de dominio
-    if gcloud beta run domain-mappings describe seqia.dev --region=us-central1 &>/dev/null; then
+    if gcloud beta run domain-mappings describe seqia.dev --region=us-central1 --format="value(metadata.name)" &>/dev/null; then
         echo "🔗 Mapeo de dominio: Configurado"
     else
         echo "🔗 Mapeo de dominio: No configurado"
