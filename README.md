@@ -82,33 +82,40 @@ npm run dev
 
 ## 🌐 Custom Domain Setup (seqia.dev)
 
-### Quick Setup
-The domain `seqia.dev` is pre-configured! Just run:
+### Important: Domain must be registered first!
+Before mapping the domain, ensure `seqia.dev` is properly registered in Google Cloud Domains.
+
+### Quick Setup (after domain registration)
 ```bash
-# In Google Cloud Shell
-chmod +x setup-domain.sh
-./setup-domain.sh
+# In Google Cloud Shell, after domain is ACTIVE
+chmod +x setup-domain-complete.sh
+./setup-domain-complete.sh
 ```
 
-### Manual Setup
-1. **Map domain to Cloud Run:**
-   ```bash
-   gcloud beta run domain-mappings create \
-     --service seqia-app \
-     --domain seqia.dev \
-     --region us-central1
-   ```
+### Step-by-step Process
 
-2. **Get DNS records:**
-   ```bash
-   gcloud beta run domain-mappings describe seqia.dev --region us-central1
-   ```
-
-3. **Configure DNS in Cloud Domains:**
+1. **Register domain in Cloud Domains:**
    - Go to [Cloud Domains](https://console.cloud.google.com/net-services/domains)
-   - Select `seqia.dev`
-   - Go to "DNS" tab
-   - Add the CNAME/A records provided by the previous command
+   - Register `seqia.dev`
+   - Wait for status to be `ACTIVE`
+
+2. **Deploy application first:**
+   - Push code to trigger Cloud Build
+   - Verify deployment is successful
+
+3. **Configure domain mapping:**
+   ```bash
+   # After successful deployment
+   chmod +x post-deploy.sh
+   ./post-deploy.sh
+   ```
+
+4. **Complete domain setup:**
+   ```bash
+   # When domain is ACTIVE in Cloud Domains
+   chmod +x setup-domain-complete.sh
+   ./setup-domain-complete.sh
+   ```
 
 4. **Wait for DNS propagation** (up to 48 hours)
 

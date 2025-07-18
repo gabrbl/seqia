@@ -33,22 +33,8 @@ steps:
       - '0'
     id: 'deploy-service'
 
-  # Mapear dominio personalizado (se activará automáticamente)
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: gcloud
-    args:
-      - 'beta'
-      - 'run'
-      - 'domain-mappings'
-      - 'create'
-      - '--service'
-      - 'seqia-app'
-      - '--domain'
-      - 'seqia.dev'
-      - '--region'
-      - 'us-central1'
-    id: 'map-domain'
-    waitFor: ['deploy-service']
+  # Nota: El mapeo de dominio se realiza manualmente después de verificar el dominio
+  # Usar post-deploy.sh para configurar el dominio personalizado
 
 # Timeout para el build (máximo 20 minutos)
 timeout: 1200s
