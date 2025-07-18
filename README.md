@@ -25,7 +25,14 @@ Modern website for Seqia, a company specializing in custom AI agents and convers
 ### Prerequisites
 1. Google Cloud Project with billing enabled
 2. GitHub repository connected to Cloud Build
-3. Required APIs enabled (see setup-gcloud.sh)
+3. Required APIs enabled and permissions configured
+
+### Setup Google Cloud Permissions
+```bash
+# Run these commands in Google Cloud Shell FIRST
+chmod +x setup-gcloud.sh
+./setup-gcloud.sh
+```
 
 ### Automatic Deployment
 This project is configured for automatic deployment using Google Cloud Build:
@@ -46,6 +53,13 @@ This project is configured for automatic deployment using Google Cloud Build:
    ```bash
    # Run these commands in Google Cloud Shell
    ./setup-gcloud.sh
+   ```
+
+4. **Post-deployment configuration:**
+   ```bash
+   # After first successful build, run:
+   chmod +x post-deploy.sh
+   ./post-deploy.sh
    ```
 
 ### Manual Deployment
