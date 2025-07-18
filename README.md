@@ -3,7 +3,7 @@
 Modern website for Seqia, a company specializing in custom AI agents and conversational solutions for businesses.
 
 ## 🚀 Live Demo
-- **Production:** [Coming soon - will be deployed automatically]
+- **Production:** https://seqia.dev (coming soon)
 - **Repository:** https://github.com/gabrbl/seqia
 
 ## 🛠 Tech Stack
@@ -65,6 +65,42 @@ npm run dev
 
 # Open http://localhost:3000
 ```
+
+## 🌐 Custom Domain Setup (seqia.dev)
+
+### Quick Setup
+The domain `seqia.dev` is pre-configured! Just run:
+```bash
+# In Google Cloud Shell
+chmod +x setup-domain.sh
+./setup-domain.sh
+```
+
+### Manual Setup
+1. **Map domain to Cloud Run:**
+   ```bash
+   gcloud run domain-mappings create \
+     --service seqia-app \
+     --domain seqia.dev \
+     --region us-central1
+   ```
+
+2. **Get DNS records:**
+   ```bash
+   gcloud run domain-mappings describe seqia.dev --region us-central1
+   ```
+
+3. **Configure DNS in Cloud Domains:**
+   - Go to [Cloud Domains](https://console.cloud.google.com/net-services/domains)
+   - Select `seqia.dev`
+   - Go to "DNS" tab
+   - Add the CNAME/A records provided by the previous command
+
+4. **Wait for DNS propagation** (up to 48 hours)
+
+### SSL Certificate
+- **Automatic:** Google Cloud Run automatically provisions SSL certificates for custom domains
+- **Let's Encrypt:** Certificates are renewed automatically
 
 ## 📝 Environment Variables
 No environment variables required for basic deployment.
