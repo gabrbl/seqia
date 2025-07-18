@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Seqia - AI Agents Platform
 
-## Getting Started
+Modern website for Seqia, a company specializing in custom AI agents and conversational solutions for businesses.
 
-First, run the development server:
+## 🚀 Live Demo
+- **Production:** [Coming soon - will be deployed automatically]
+- **Repository:** https://github.com/gabrbl/seqia
 
+## 🛠 Tech Stack
+- **Framework:** Next.js 14+ with TypeScript
+- **Styling:** Tailwind CSS
+- **Deployment:** Google Cloud Run
+- **CI/CD:** Google Cloud Build
+- **Container:** Docker
+
+## 🎨 Features
+- Modern animated logo with SVG graphics
+- Responsive design with Tailwind CSS
+- Gradient backgrounds and smooth animations
+- Contact form with modern UI
+- Professional branding with "Seqia"
+
+## 🚀 Google Cloud Deployment
+
+### Prerequisites
+1. Google Cloud Project with billing enabled
+2. GitHub repository connected to Cloud Build
+3. Required APIs enabled (see setup-gcloud.sh)
+
+### Automatic Deployment
+This project is configured for automatic deployment using Google Cloud Build:
+
+1. **Connect Repository to Cloud Build:**
+   - Go to [Cloud Build Triggers](https://console.cloud.google.com/cloud-build/triggers)
+   - Click "Connect Repository"
+   - Select GitHub and authorize
+   - Choose this repository (`gabrbl/seqia`)
+
+2. **Create Build Trigger:**
+   - Name: `seqia-deploy`
+   - Event: Push to branch `main`
+   - Configuration: Cloud Build configuration file
+   - Location: `/cloudbuild.yaml`
+
+3. **Configure Permissions:**
+   ```bash
+   # Run these commands in Google Cloud Shell
+   ./setup-gcloud.sh
+   ```
+
+### Manual Deployment
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Build and deploy manually
+gcloud builds submit --config cloudbuild.yaml
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔧 Local Development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Install dependencies
+npm install
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Run development server
+npm run dev
 
-## Learn More
+# Open http://localhost:3000
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 📝 Environment Variables
+No environment variables required for basic deployment.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🏗 Build Process
+1. **Build trigger** activates on push to `main`
+2. **Docker image** is built using multi-stage Dockerfile
+3. **Image is pushed** to Google Container Registry
+4. **Cloud Run service** is updated with new image
+5. **Automatic scaling** based on traffic
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 💰 Estimated Costs
+- **Cloud Run:** ~$0.001 per 100 requests
+- **Container Registry:** ~$0.10/GB per month
+- **Cloud Build:** 120 build-minutes free per day
+- **Total for small website:** < $5/month
 
-## Deploy on Vercel
+## 📧 Contact
+For questions about AI agents and custom solutions, visit the contact section on the website.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+© 2025 Seqia. All rights reserved.
