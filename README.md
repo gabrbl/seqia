@@ -79,7 +79,7 @@ chmod +x setup-domain.sh
 ### Manual Setup
 1. **Map domain to Cloud Run:**
    ```bash
-   gcloud run domain-mappings create \
+   gcloud beta run domain-mappings create \
      --service seqia-app \
      --domain seqia.dev \
      --region us-central1
@@ -87,7 +87,7 @@ chmod +x setup-domain.sh
 
 2. **Get DNS records:**
    ```bash
-   gcloud run domain-mappings describe seqia.dev --region us-central1
+   gcloud beta run domain-mappings describe seqia.dev --region us-central1
    ```
 
 3. **Configure DNS in Cloud Domains:**

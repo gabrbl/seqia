@@ -37,7 +37,7 @@ fi
 # Mapear dominio a Cloud Run
 echo ""
 echo "3. Mapeando dominio a Cloud Run..."
-gcloud run domain-mappings create \
+gcloud beta run domain-mappings create \
     --service $SERVICE_NAME \
     --domain $DOMAIN \
     --region $REGION
@@ -54,12 +54,12 @@ echo ""
 echo "4. Obteniendo registros DNS necesarios..."
 echo "Ejecuta este comando para ver los registros DNS que necesitas configurar:"
 echo ""
-echo "gcloud run domain-mappings describe $DOMAIN --region=$REGION"
+echo "gcloud beta run domain-mappings describe $DOMAIN --region=$REGION"
 echo ""
 
 # Mostrar registros DNS
 echo "📋 Registros DNS necesarios:"
-gcloud run domain-mappings describe $DOMAIN --region=$REGION --format="value(status.resourceRecords[].name,status.resourceRecords[].type,status.resourceRecords[].rrdata)" | while read name type data; do
+gcloud beta run domain-mappings describe $DOMAIN --region=$REGION --format="value(status.resourceRecords[].name,status.resourceRecords[].type,status.resourceRecords[].rrdata)" | while read name type data; do
     echo "  Nombre: $name"
     echo "  Tipo: $type" 
     echo "  Valor: $data"
@@ -75,4 +75,4 @@ echo "2. Espera a que se propague el DNS (puede tomar hasta 48 horas)"
 echo "3. Tu sitio estará disponible en: https://$DOMAIN"
 echo ""
 echo "💡 Para verificar el estado:"
-echo "   gcloud run domain-mappings describe $DOMAIN --region=$REGION"
+echo "   gcloud beta run domain-mappings describe $DOMAIN --region=$REGION"

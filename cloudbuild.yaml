@@ -33,10 +33,28 @@ steps:
       - '0'
     id: 'deploy-service'
 
+  # Configurar permisos IAM para acceso público
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'services'
+      - 'add-iam-policy-binding'
+      - 'seqia-app'
+      - '--region'
+      - 'us-central1'
+      - '--member'
+      - 'allUsers'
+      - '--role'
+      - 'roles/run.invoker'
+    id: 'set-iam-policy'
+    waitFor: ['deploy-service']
+
   # Mapear dominio personalizado (se activará automáticamente)
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args:
+      - 'beta'
       - 'run'
       - 'domain-mappings'
       - 'create'
@@ -47,7 +65,7 @@ steps:
       - '--region'
       - 'us-central1'
     id: 'map-domain'
-    waitFor: ['deploy-service']
+    waitFor: ['set-iam-policy']
 
 # Timeout para el build (máximo 20 minutos)
 timeout: 1200s
