@@ -22,6 +22,18 @@ Modern website for Seqia, a company specializing in custom AI agents and convers
 
 ## 🚀 Google Cloud Deployment
 
+### Super Simple Setup (Recommended)
+
+Just run this single command in Google Cloud Shell:
+
+```bash
+curl -sSL https://raw.githubusercontent.com/gabrbl/seqia/main/seqia-setup.sh | bash
+```
+
+This will guide you through all the setup steps with an interactive menu.
+
+### Manual Setup
+
 ### Prerequisites
 1. Google Cloud Project with billing enabled
 2. GitHub repository connected to Cloud Build
@@ -29,7 +41,9 @@ Modern website for Seqia, a company specializing in custom AI agents and convers
 
 ### Setup Google Cloud Permissions
 ```bash
-# Run these commands in Google Cloud Shell FIRST
+# Run these commands in Google Cloud Shell FIRST (one time setup)
+cd seqia 2>/dev/null || git clone https://github.com/gabrbl/seqia.git && cd seqia
+git pull origin main
 chmod +x setup-gcloud.sh
 ./setup-gcloud.sh
 ```
@@ -99,23 +113,48 @@ chmod +x setup-domain-complete.sh
    - Register `seqia.dev`
    - Wait for status to be `ACTIVE`
 
-2. **Deploy application first:**
-   - Push code to trigger Cloud Build
-   - Verify deployment is successful
-
-3. **Configure domain mapping:**
+2. **After successful deployment, run:**
    ```bash
-   # After successful deployment
+   # In Google Cloud Shell
+   # If directory doesn't exist:
+   git clone https://github.com/gabrbl/seqia.git
+   cd seqia
+   
+   # If directory already exists:
+   cd seqia
+   git pull origin main
+   
+   # Then run post-deploy:
    chmod +x post-deploy.sh
    ./post-deploy.sh
    ```
 
-4. **Complete domain setup:**
+3. **Complete domain setup (when domain is ACTIVE):**
    ```bash
-   # When domain is ACTIVE in Cloud Domains
+   # In the same seqia directory
    chmod +x setup-domain-complete.sh
    ./setup-domain-complete.sh
    ```
+
+### Quick Commands for Cloud Shell
+
+```bash
+# Setup Google Cloud permissions (run once)
+cd seqia 2>/dev/null || git clone https://github.com/gabrbl/seqia.git && cd seqia
+git pull origin main
+chmod +x setup-gcloud.sh
+./setup-gcloud.sh
+
+# Post-deployment configuration (after each build)
+cd seqia && git pull origin main
+chmod +x post-deploy.sh
+./post-deploy.sh
+
+# Domain setup (when domain is registered and ACTIVE)
+cd seqia && git pull origin main
+chmod +x setup-domain-complete.sh
+./setup-domain-complete.sh
+```
 
 4. **Wait for DNS propagation** (up to 48 hours)
 
