@@ -24,13 +24,22 @@ Modern website for Seqia, a company specializing in custom AI agents and convers
 
 ### Super Simple Setup (Recommended)
 
-Just run this single command in Google Cloud Shell:
+In Google Cloud Shell, run these commands:
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/gabrbl/seqia/main/seqia-setup.sh | bash
+# Step 1: Get the setup script
+git clone https://github.com/gabrbl/seqia.git || (cd seqia && git pull)
+cd seqia
+
+# Step 2: Run the interactive setup
+chmod +x seqia-setup.sh
+./seqia-setup.sh
 ```
 
-This will guide you through all the setup steps with an interactive menu.
+Alternative one-liner (if the above doesn't work):
+```bash
+wget -O - https://raw.githubusercontent.com/gabrbl/seqia/main/seqia-setup.sh | bash
+```
 
 ### Manual Setup
 
@@ -138,22 +147,35 @@ chmod +x setup-domain-complete.sh
 
 ### Quick Commands for Cloud Shell
 
+**First time setup:**
 ```bash
-# Setup Google Cloud permissions (run once)
-cd seqia 2>/dev/null || git clone https://github.com/gabrbl/seqia.git && cd seqia
-git pull origin main
+git clone https://github.com/gabrbl/seqia.git
+cd seqia
 chmod +x setup-gcloud.sh
 ./setup-gcloud.sh
+```
 
-# Post-deployment configuration (after each build)
-cd seqia && git pull origin main
+**After each successful build:**
+```bash
+cd seqia
+git pull origin main
 chmod +x post-deploy.sh
 ./post-deploy.sh
+```
 
-# Domain setup (when domain is registered and ACTIVE)
-cd seqia && git pull origin main
+**When domain is registered and ACTIVE:**
+```bash
+cd seqia
+git pull origin main
 chmod +x setup-domain-complete.sh
 ./setup-domain-complete.sh
+```
+
+**Interactive menu (all-in-one):**
+```bash
+cd seqia
+chmod +x seqia-setup.sh
+./seqia-setup.sh
 ```
 
 4. **Wait for DNS propagation** (up to 48 hours)
@@ -180,6 +202,9 @@ No environment variables required for basic deployment.
 
 ## 📧 Contact
 For questions about AI agents and custom solutions, visit the contact section on the website.
+
+## 🛠 Troubleshooting
+Having issues? Check the [Troubleshooting Guide](TROUBLESHOOTING.md) for common problems and solutions.
 
 ---
 © 2025 Seqia. All rights reserved.
